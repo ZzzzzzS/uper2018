@@ -25,13 +25,28 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    configwindow.cpp \
+    controlwindow.cpp \
+    smartcarhelper.cpp \
+    settingwindow.cpp \
+    aboutwindow.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    configwindow.h \
+    controlwindow.h \
+    smartcarhelper.h \
+    settingwindow.h \
+    aboutwindow.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    configwindow.ui \
+    controlwindow.ui \
+    smartcarhelper.ui \
+    settingwindow.ui \
+    aboutwindow.ui
 
 CONFIG += mobility
 MOBILITY = 
