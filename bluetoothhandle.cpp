@@ -1,5 +1,6 @@
 ﻿#include "bluetoothhandle.h"
-
+#include <QDebug>
+#include <QtDebug>
 BlueToothHandle::BlueToothHandle(QObject *parent) : QObject(parent)
 {
     this->ServiceUuid=QLatin1String("00001101-0000-1000-8000-00805F9B34FB");//保存蓝牙UUID
@@ -23,8 +24,10 @@ void BlueToothHandle::Power(bool Power)
 void BlueToothHandle::BlueToothConnect(QBluetoothDeviceInfo Base)
 {
     QObject::disconnect(this->Socket,SIGNAL(connected()),this,SLOT(Connected()));
+    QObject::disconnect(this->Socket,SIGNAL(error(QBluetoothSocket::SocketError)),this,SLOT(ConnectError()));
     this->Socket->connectToService(Base.address(),QBluetoothUuid(this->ServiceUuid));
     QObject::connect(this->Socket,SIGNAL(connected()),this,SLOT(Connected()));
+    QObject::connect(this->Socket,SIGNAL(error(QBluetoothSocket::SocketError)),this,SLOT(ConnectError()));
 }
 
 //蓝牙连接成功提示函数
@@ -79,14 +82,19 @@ void BlueToothHandle::SafeWrite(QString data)
 //查找蓝牙设备函数
 void BlueToothHandle::scan()
 {
+    qDebug()<<"ok5";
     if(this->LocalDevice->hostMode()==QBluetoothLocalDevice::HostPoweredOff)
     {
         QMessageBox::information(NULL,"蓝牙未打开","请打开蓝牙后重试",QMessageBox::Ok);
     }
+    qDebug()<<"ok5";
     QObject::disconnect(this->DiscoverAgent,SIGNAL(deviceDiscovered(QBluetoothDeviceInfo)),this,SLOT(Discoverd(QBluetoothDeviceInfo)));
     this->DeviceInfo.clear();
+    qDebug()<<"ok6";
     this->DiscoverAgent->stop();
+    qDebug()<<"ok7";
     this->DiscoverAgent->start();
+    qDebug()<<"ok8";
     QObject::connect(this->DiscoverAgent,SIGNAL(deviceDiscovered(QBluetoothDeviceInfo)),this,SLOT(Discoverd(QBluetoothDeviceInfo)));
 }
 

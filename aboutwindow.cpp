@@ -20,10 +20,10 @@ AboutWindow::~AboutWindow()
 
 void AboutWindow::BlogSlot()
 {
-  QDesktopServices::openUrl(QUrl(QLatin1String("https://zzshub.cn/")));
+  QDesktopServices::openUrl(QUrl(QLatin1String("http://zzshub.cn/")));
 }
 
 void AboutWindow::FeedBackSlot()
 {
-    QDesktopServices::openUrl(QUrl(QLatin1String("https://zzshub.cn/")));
+    QDesktopServices::openUrl(QUrl(QLatin1String("http://zzshub.cn/")));
 }

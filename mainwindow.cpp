@@ -28,6 +28,7 @@ void MainWindow::AboutSlot()
 void MainWindow::ConfigSlot()
 {
     ConfigWindow WindowBase;
+    WindowBase.BlueToothHandle_t=this->BlueToothHandle_t;
     WindowBase.showFullScreen();
     WindowBase.exec();
 }

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>300</width>
+    <width>314</width>
     <height>600</height>
    </rect>
   </property>
@@ -155,10 +155,14 @@
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_4">
               <item>
-               <widget class="QLineEdit" name="SendArea"/>
+               <widget class="QLineEdit" name="SendArea">
+                <property name="text">
+                 <string>About</string>
+                </property>
+               </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton_2">
+               <widget class="QPushButton" name="SendButton">
                 <property name="text">
                  <string>发送</string>
                 </property>

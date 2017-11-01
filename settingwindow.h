@@ -1,4 +1,4 @@
-#ifndef SETTINGWINDOW_H
+﻿#ifndef SETTINGWINDOW_H
 #define SETTINGWINDOW_H
 
 #include <QDialog>
@@ -19,4 +19,8 @@ private:
     Ui::SettingWindow *ui;
 };
 
+
+#if _MSC_VER >= 1600
+#pragma execution_character_set("utf-8")
+#endif
 #endif // SETTINGWINDOW_H

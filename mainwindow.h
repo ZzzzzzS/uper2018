@@ -5,6 +5,7 @@
 #include "aboutwindow.h"
 #include "configwindow.h"
 #include "controlwindow.h"
+#include "bluetoothhandle.h"
 #include <QPixmap>
 
 namespace Ui {
@@ -17,6 +18,7 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
+    BlueToothHandle *BlueToothHandle_t;
     ~MainWindow();
 
 private slots:
@@ -30,4 +32,8 @@ private:
     QPixmap pix;
 };
 
+
+#if _MSC_VER >= 1600
+#pragma execution_character_set("utf-8")
+#endif
 #endif // MAINWINDOW_H
