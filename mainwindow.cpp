@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+    delete this->BlueToothHandle_t;
     delete ui;
 }
 

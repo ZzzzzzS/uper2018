@@ -6,7 +6,6 @@ ControlWindow::ControlWindow(QWidget *parent) :
     ui(new Ui::ControlWindow)
 {
     ui->setupUi(this);
-
     QObject::connect(ui->BackButton,SIGNAL(clicked(bool)),this,SLOT(close()));
 }
 
