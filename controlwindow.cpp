@@ -1,4 +1,4 @@
-#include "controlwindow.h"
+﻿#include "controlwindow.h"
 #include "ui_controlwindow.h"
 
 ControlWindow::ControlWindow(QWidget *parent) :
@@ -6,6 +6,8 @@ ControlWindow::ControlWindow(QWidget *parent) :
     ui(new Ui::ControlWindow)
 {
     ui->setupUi(this);
+
+    QObject::connect(ui->BackButton,SIGNAL(clicked(bool)),this,SLOT(close()));
 }
 
 ControlWindow::~ControlWindow()

@@ -6,7 +6,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    this->pix.load("logo.jpg");
+    ui->LogoLabel->setPixmap(this->pix.scaled(ui->LogoLabel->size()));
     QObject::connect(ui->AboutButton,SIGNAL(clicked(bool)),this,SLOT(AboutSlot()));
+    QObject::connect(ui->BluetoothButton,SIGNAL(clicked(bool)),this,SLOT(ConfigSlot()));
+    QObject::connect(ui->RemoteButton,SIGNAL(clicked(bool)),this,SLOT(ControlSlot()));
 }
 
 MainWindow::~MainWindow()
@@ -17,5 +21,20 @@ MainWindow::~MainWindow()
 void MainWindow::AboutSlot()
 {
     AboutWindow WindowBase;
+    WindowBase.showFullScreen();
+    WindowBase.exec();
+}
+
+void MainWindow::ConfigSlot()
+{
+    ConfigWindow WindowBase;
+    WindowBase.showFullScreen();
+    WindowBase.exec();
+}
+
+void MainWindow::ControlSlot()
+{
+    ControlWindow WindowBase;
+    WindowBase.showFullScreen();
     WindowBase.exec();
 }

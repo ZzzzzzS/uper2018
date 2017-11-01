@@ -76,13 +76,13 @@
         <item>
          <widget class="QLabel" name="LogoLabel">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
           <property name="text">
-           <string>718实验室logo</string>
+           <string/>
           </property>
          </widget>
         </item>

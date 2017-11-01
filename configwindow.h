@@ -1,4 +1,4 @@
-#ifndef CONFIGWINDOW_H
+﻿#ifndef CONFIGWINDOW_H
 #define CONFIGWINDOW_H
 
 #include <QDialog>
@@ -14,6 +14,9 @@ class ConfigWindow : public QDialog
 public:
     explicit ConfigWindow(QWidget *parent = 0);
     ~ConfigWindow();
+
+private slots:
+
 
 private:
     Ui::ConfigWindow *ui;

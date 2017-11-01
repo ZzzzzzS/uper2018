@@ -1,4 +1,4 @@
-#ifndef CONTROLWINDOW_H
+﻿#ifndef CONTROLWINDOW_H
 #define CONTROLWINDOW_H
 
 #include <QDialog>
@@ -14,6 +14,7 @@ class ControlWindow : public QDialog
 public:
     explicit ControlWindow(QWidget *parent = 0);
     ~ControlWindow();
+
 
 private:
     Ui::ControlWindow *ui;

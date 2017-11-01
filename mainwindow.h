@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 #include "aboutwindow.h"
+#include "configwindow.h"
+#include "controlwindow.h"
+#include <QPixmap>
 
 namespace Ui {
 class MainWindow;
@@ -18,9 +21,13 @@ public:
 
 private slots:
     void AboutSlot();
+    void ConfigSlot();
+    void ControlSlot();
 
 private:
     Ui::MainWindow *ui;
+
+    QPixmap pix;
 };
 
 #endif // MAINWINDOW_H

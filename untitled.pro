@@ -5,6 +5,9 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += serialport
+QT       += bluetooth
+QT       += sensors
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -30,7 +33,8 @@ SOURCES += \
     controlwindow.cpp \
     smartcarhelper.cpp \
     settingwindow.cpp \
-    aboutwindow.cpp
+    aboutwindow.cpp \
+    bluetoothhandle.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -38,7 +42,8 @@ HEADERS += \
     controlwindow.h \
     smartcarhelper.h \
     settingwindow.h \
-    aboutwindow.h
+    aboutwindow.h \
+    bluetoothhandle.h
 
 FORMS += \
         mainwindow.ui \
