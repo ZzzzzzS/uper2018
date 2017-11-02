@@ -2,6 +2,12 @@
 #define CONTROLWINDOW_H
 
 #include <QDialog>
+#include "bluetoothhandle.h"
+#include <QString>
+#include <QTimer>
+#include <QtSensors/QAccelerometer>
+#include <QPointF>
+
 
 namespace Ui {
 class ControlWindow;
@@ -13,11 +19,29 @@ class ControlWindow : public QDialog
 
 public:
     explicit ControlWindow(QWidget *parent = 0);
+    BlueToothHandle *BlueToothHandle_t;
     ~ControlWindow();
 
 
+private slots:
+    void ReceiveSlot();
+    void Function1Slot();
+    void Function2Slot();
+    void Function3Slot();
+    void Function4Slot();
+    void SendControlMessageSlot();
+    void ReadAcceSlot();
+    void StopCarSlot();
 private:
     Ui::ControlWindow *ui;
+    QString Function1Name;
+    QString Function2Name;
+    QString Function3Name;
+    QString Function4Name;
+    QTimer ReadAcceTimer;
+    QAccelerometer AcceSensor;
+    QPointF AccePoint;
+
 };
 
 
