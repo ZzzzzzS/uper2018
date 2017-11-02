@@ -38,6 +38,7 @@ void MainWindow::ControlSlot()
 {
     ControlWindow WindowBase;
     WindowBase.BlueToothHandle_t=this->BlueToothHandle_t;
+    WindowBase.SetButton();
     WindowBase.showFullScreen();
     WindowBase.exec();
 }

@@ -20,6 +20,7 @@ class ControlWindow : public QDialog
 public:
     explicit ControlWindow(QWidget *parent = 0);
     BlueToothHandle *BlueToothHandle_t;
+    void SetButton();
     ~ControlWindow();
 
 

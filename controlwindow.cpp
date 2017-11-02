@@ -8,10 +8,6 @@ ControlWindow::ControlWindow(QWidget *parent) :
     ui->setupUi(this);
     this->AcceSensor.start();
     this->ReadAcceTimer.start(100);
-    /*if(this->BlueToothHandle_t->Socket->state()==QBluetoothSocket::ConnectedState)
-    {
-       QObject::connect(this->BlueToothHandle_t->Socket,SIGNAL(readyRead()),this,SLOT(ReceiveSlot()));
-    }*/
     QObject::connect(this->ui->Function1Button,SIGNAL(clicked(bool)),this,SLOT(Function1Slot()));
     QObject::connect(this->ui->Function2Button,SIGNAL(clicked(bool)),this,SLOT(Function2Slot()));
     QObject::connect(this->ui->Function3Button,SIGNAL(clicked(bool)),this,SLOT(Function3Slot()));
@@ -26,6 +22,14 @@ ControlWindow::~ControlWindow()
     delete ui;
 }
 
+
+void ControlWindow::SetButton()
+{
+    if(this->BlueToothHandle_t->Socket->state()==QBluetoothSocket::ConnectedState)
+    {
+       QObject::connect(this->BlueToothHandle_t->Socket,SIGNAL(readyRead()),this,SLOT(ReceiveSlot()));
+    }
+}
 void ControlWindow::ReceiveSlot()
 {
     ui->MessageEdit->append(this->BlueToothHandle_t->Socket->readAll());
