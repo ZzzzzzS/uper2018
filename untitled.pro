@@ -34,7 +34,8 @@ SOURCES += \
     smartcarhelper.cpp \
     settingwindow.cpp \
     aboutwindow.cpp \
-    bluetoothhandle.cpp
+    bluetoothhandle.cpp \
+    zhandle.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -43,7 +44,8 @@ HEADERS += \
     smartcarhelper.h \
     settingwindow.h \
     aboutwindow.h \
-    bluetoothhandle.h
+    bluetoothhandle.h \
+    zhandle.h
 
 FORMS += \
         mainwindow.ui \

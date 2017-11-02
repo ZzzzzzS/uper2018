@@ -7,6 +7,7 @@
 #include <QTimer>
 #include <QtSensors/QAccelerometer>
 #include <QPointF>
+#include <zhandle.h>
 
 
 namespace Ui {
@@ -42,6 +43,8 @@ private:
     QTimer ReadAcceTimer;
     QAccelerometer AcceSensor;
     QPointF AccePoint;
+
+    ZHandle *testButton;
 
 };
 
