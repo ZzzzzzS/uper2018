@@ -58,6 +58,10 @@ void ControlWindow::Function4Slot()
 
 void ControlWindow::StopCarSlot()
 {
+    if(ui->GControlBox->isChecked())
+    {
+        ui->GControlBox->setChecked(false);
+    }
     this->BlueToothHandle_t->SafeWrite("FSTOP");
 }
 
@@ -97,6 +101,34 @@ void ControlWindow::ReadAcceSlot()
         else if(MessageToSend.y()<=-100)
         {
             MessageToSend.setY(-99);
+        }
+
+        if(this->BlueToothHandle_t->Socket->state()==QBluetoothSocket::ConnectedState)
+        {
+            this->BlueToothHandle_t->SafeWrite("X"+QString::number(MessageToSend.x()));
+            this->BlueToothHandle_t->SafeWrite("Y"+QString::number(MessageToSend.y()));
+        }
+    }
+    else
+    {
+        MessageToSend.setY(this->testButton->CurrentSpeed.x());
+        MessageToSend.setX(-this->testButton->CurrentSpeed.y());
+
+        if(MessageToSend.y()>=100)
+        {
+            MessageToSend.setY(99);
+        }
+        else if(MessageToSend.y()<=-100)
+        {
+            MessageToSend.setY(-99);
+        }
+        if(MessageToSend.x()>=100)
+        {
+            MessageToSend.setX(99);
+        }
+        else if(MessageToSend.x()<=-100)
+        {
+            MessageToSend.setX(-99);
         }
 
         if(this->BlueToothHandle_t->Socket->state()==QBluetoothSocket::ConnectedState)

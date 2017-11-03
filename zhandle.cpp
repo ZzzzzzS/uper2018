@@ -1,4 +1,5 @@
 ﻿#include "zhandle.h"
+#include <QtMath>
 
 ZHandle::ZHandle()
 {
@@ -13,5 +14,55 @@ void ZHandle::mousePressEvent(QMouseEvent *e)
 void ZHandle::mouseMoveEvent(QMouseEvent *e)
 {
     QPoint bpoint=e->globalPos()-this->WindowPoint;
-    this->move(bpoint);
+
+
+    if(sqrt(pow(abs(bpoint.rx()-centerPoint.rx()),2) + pow(abs(bpoint.ry()-centerPoint.ry()),2)) < r)
+    {
+      move(bpoint);
+    }
+
+    else if(bpoint.rx()>centerPoint.rx() && bpoint.ry()<centerPoint.ry())
+    {
+        double k = (double)(bpoint.rx()-centerPoint.rx())/(centerPoint.ry()-bpoint.ry());
+        double angle= qAtan(k)/3.1415*180;
+        bpoint.setX(centerPoint.rx() + r*qCos((angle-90.0)*3.1415/180));
+        bpoint.setY(centerPoint.ry() + r*qSin((angle-90.0)*3.1415/180));
+        move(bpoint);
+    }
+    else if(bpoint.rx()>centerPoint.rx() && bpoint.ry()>centerPoint.ry())
+    {
+        double k = (double)(bpoint.rx()-centerPoint.rx())/(bpoint.ry()-centerPoint.ry());
+        double angle= 180-qAtan(k)/3.1415*180;
+        bpoint.setX(centerPoint.rx() + r*qCos((angle-90.0)*3.1415/180));
+        bpoint.setY(centerPoint.ry() + r*qSin((angle-90.0)*3.1415/180));
+        move(bpoint);
+    }
+    else if(bpoint.rx()<centerPoint.rx() && bpoint.ry()<centerPoint.ry())
+    {
+        double k = (double)(centerPoint.rx()-bpoint.rx())/(centerPoint.ry()-bpoint.ry());
+        double angle= qAtan(k)/3.1415*180;
+        bpoint.setX(centerPoint.rx() - r*qCos((angle-90.0)*3.1415/180));
+        bpoint.setY(centerPoint.ry() + r*qSin((angle-90.0)*3.1415/180));
+        move(bpoint);
+    }
+    else if(bpoint.rx()<centerPoint.rx() && bpoint.ry()>centerPoint.ry())
+    {
+        double k = (double)(centerPoint.rx()-bpoint.rx())/(bpoint.ry()-centerPoint.ry());
+        double angle= qAtan(k)/3.1415*180;
+        bpoint.setX(centerPoint.rx() - r*qCos((angle-90.0)*3.1415/180));
+        bpoint.setY(centerPoint.ry() - r*qSin((angle-90.0)*3.1415/180));
+        move(bpoint);
+    }
+
+    this->CurrentSpeed.setX((bpoint.x()-400)/1.5);
+    this->CurrentSpeed.setY((bpoint.y()-250)/1.5);
+}
+
+void ZHandle::mouseReleaseEvent(QMouseEvent *e)
+{
+    centerPoint.setX(400);   //设置圆心X坐标
+    centerPoint.setY(250);   //设置圆心Y坐标
+    move(centerPoint);
+    this->CurrentSpeed.setX(0);
+    this->CurrentSpeed.setY(0);
 }
