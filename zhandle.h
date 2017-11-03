@@ -3,6 +3,8 @@
 
 #include <QWidget>
 #include <QPushButton>
+#include <QTouchEvent>
+#include <QPoint>
 
 class ZHandle : public QPushButton
 {
@@ -12,6 +14,11 @@ public:
     {
 
     }
+private:
+    QPoint WindowPoint;
+protected:
+    void mouseMoveEvent(QMouseEvent*e);
+    void mousePressEvent(QMouseEvent*e);
 };
 
 #endif // ZHANDLE_H
