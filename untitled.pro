@@ -5,9 +5,9 @@
 #-------------------------------------------------
 
 QT       += core gui
-QT       += serialport
 QT       += bluetooth
 QT       += sensors
+QT       += serialport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -35,7 +35,8 @@ SOURCES += \
     settingwindow.cpp \
     aboutwindow.cpp \
     bluetoothhandle.cpp \
-    zhandle.cpp
+    zhandle.cpp \
+    serialporthandle.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -45,7 +46,8 @@ HEADERS += \
     settingwindow.h \
     aboutwindow.h \
     bluetoothhandle.h \
-    zhandle.h
+    zhandle.h \
+    serialporthandle.h
 
 FORMS += \
         mainwindow.ui \
