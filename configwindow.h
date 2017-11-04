@@ -2,7 +2,7 @@
 #define CONFIGWINDOW_H
 
 #include <QDialog>
-#include "bluetoothhandle.h"
+#include "serialporthandle.h"
 
 namespace Ui {
 class ConfigWindow;

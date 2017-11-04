@@ -1,4 +1,4 @@
-#include "serialporthandle.h"
+﻿#include "serialporthandle.h"
 
 serialporthandle::serialporthandle()
 {

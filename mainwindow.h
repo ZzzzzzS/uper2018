@@ -5,7 +5,7 @@
 #include "aboutwindow.h"
 #include "configwindow.h"
 #include "controlwindow.h"
-#include "bluetoothhandle.h"
+#include "serialporthandle.h"
 #include <QPixmap>
 
 namespace Ui {

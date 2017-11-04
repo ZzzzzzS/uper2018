@@ -2,7 +2,7 @@
 #define CONTROLWINDOW_H
 
 #include <QDialog>
-#include "bluetoothhandle.h"
+#include "serialporthandle.h"
 #include <QString>
 #include <QTimer>
 #include <QtSensors/QAccelerometer>

@@ -5,7 +5,6 @@
 #-------------------------------------------------
 
 QT       += core gui
-QT       += bluetooth
 QT       += sensors
 QT       += serialport
 
@@ -34,7 +33,6 @@ SOURCES += \
     smartcarhelper.cpp \
     settingwindow.cpp \
     aboutwindow.cpp \
-    bluetoothhandle.cpp \
     zhandle.cpp \
     serialporthandle.cpp
 
@@ -45,7 +43,6 @@ HEADERS += \
     smartcarhelper.h \
     settingwindow.h \
     aboutwindow.h \
-    bluetoothhandle.h \
     zhandle.h \
     serialporthandle.h
 

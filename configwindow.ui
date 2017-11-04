@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>314</width>
+    <width>300</width>
     <height>600</height>
    </rect>
   </property>
@@ -65,7 +65,7 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>蓝牙配置</string>
+            <string>串口配置</string>
            </property>
           </widget>
          </item>
@@ -98,13 +98,53 @@
        <item>
         <widget class="QGroupBox" name="groupBox">
          <property name="title">
-          <string>蓝牙配置</string>
+          <string>串口配置</string>
          </property>
          <layout class="QGridLayout" name="gridLayout">
           <item row="0" column="0">
            <layout class="QVBoxLayout" name="verticalLayout_2">
             <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_6">
+              <item>
+               <widget class="QLabel" name="label_3">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string>波特率:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="comboBox">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
              <layout class="QHBoxLayout" name="horizontalLayout_2">
+              <item>
+               <widget class="QLabel" name="label_2">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string>端口:   </string>
+                </property>
+               </widget>
+              </item>
               <item>
                <widget class="QComboBox" name="ConnectBox">
                 <property name="sizePolicy">
@@ -112,6 +152,20 @@
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_8">
+              <item>
+               <widget class="QPushButton" name="ConnectButton">
+                <property name="text">
+                 <string>连接</string>
+                </property>
+                <property name="default">
+                 <bool>false</bool>
                 </property>
                </widget>
               </item>
@@ -124,16 +178,6 @@
               </item>
              </layout>
             </item>
-            <item>
-             <widget class="QPushButton" name="ConnectButton">
-              <property name="text">
-               <string>连接</string>
-              </property>
-              <property name="default">
-               <bool>false</bool>
-              </property>
-             </widget>
-            </item>
            </layout>
           </item>
          </layout>
@@ -142,7 +186,7 @@
        <item>
         <widget class="QGroupBox" name="groupBox_2">
          <property name="title">
-          <string>蓝牙串口助手</string>
+          <string>串口助手</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_2">
           <item row="0" column="0">
@@ -151,6 +195,11 @@
              <layout class="QHBoxLayout" name="horizontalLayout_3">
               <item>
                <widget class="QCheckBox" name="HEXBox">
+                <property name="font">
+                 <font>
+                  <pointsize>12</pointsize>
+                 </font>
+                </property>
                 <property name="text">
                  <string>16进制显示</string>
                 </property>
@@ -158,6 +207,11 @@
               </item>
               <item>
                <widget class="QCheckBox" name="AutoCleanBox">
+                <property name="font">
+                 <font>
+                  <pointsize>12</pointsize>
+                 </font>
+                </property>
                 <property name="text">
                  <string>自动清发送区</string>
                 </property>
@@ -197,22 +251,6 @@
           </item>
          </layout>
         </widget>
-       </item>
-       <item>
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Fixed</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
        </item>
       </layout>
      </item>
