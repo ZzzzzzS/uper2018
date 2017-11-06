@@ -54,14 +54,14 @@ void ZHandle::mouseMoveEvent(QMouseEvent *e)
         move(bpoint);
     }
 
-    this->CurrentSpeed.setX((bpoint.x()-400)/1.5);
-    this->CurrentSpeed.setY((bpoint.y()-250)/1.5);
+    this->CurrentSpeed.setX((bpoint.x()-200));
+    this->CurrentSpeed.setY((bpoint.y()-100));
 }
 
 void ZHandle::mouseReleaseEvent(QMouseEvent *e)
 {
-    centerPoint.setX(400);   //设置圆心X坐标
-    centerPoint.setY(250);   //设置圆心Y坐标
+    centerPoint.setX(200);   //设置圆心X坐标
+    centerPoint.setY(100);   //设置圆心Y坐标
     move(centerPoint);
     this->CurrentSpeed.setX(0);
     this->CurrentSpeed.setY(0);

@@ -2,6 +2,7 @@
 #define SMARTCARHELPER_H
 
 #include <QDialog>
+#include "serialporthandle.h"
 
 namespace Ui {
 class SmartCarHelper;
@@ -12,11 +13,12 @@ class SmartCarHelper : public QDialog
     Q_OBJECT
 
 public:
-    explicit SmartCarHelper(QWidget *parent = 0);
+    explicit SmartCarHelper(QWidget *parent = 0, serialporthandle *handle=0);
     ~SmartCarHelper();
 
 private:
     Ui::SmartCarHelper *ui;
+    serialporthandle *serialporthandle_t;
 };
 
 

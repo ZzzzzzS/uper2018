@@ -6,6 +6,7 @@
 #include "configwindow.h"
 #include "controlwindow.h"
 #include "serialporthandle.h"
+#include "smartcarhelper.h"
 #include <QPixmap>
 
 namespace Ui {
@@ -25,6 +26,7 @@ private slots:
     void AboutSlot();
     void ConfigSlot();
     void ControlSlot();
+    void HelperSlot();
 
 private:
     Ui::MainWindow *ui;

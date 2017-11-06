@@ -43,7 +43,7 @@
           <item>
            <widget class="QLabel" name="label">
             <property name="text">
-             <string>718蓝牙遥控器</string>
+             <string>718串口助手</string>
             </property>
            </widget>
           </item>
@@ -120,7 +120,7 @@
               <item>
                <widget class="QPushButton" name="BluetoothButton">
                 <property name="text">
-                 <string>蓝牙助手</string>
+                 <string>串口助手</string>
                 </property>
                </widget>
               </item>

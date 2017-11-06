@@ -23,7 +23,7 @@ ConfigWindow::~ConfigWindow()
 //连接函数
 void ConfigWindow::ConnectSlot()
 {
-    if(ui->ConnectButton->text()=="打开串口")
+    if(ui->ConnectButton->text()=="连接")
         {
             QMessageBox a;
             a.setIcon(QMessageBox::Information);
@@ -36,17 +36,17 @@ void ConfigWindow::ConnectSlot()
             a.close();
             if(this->serialporthandle_t->isOpen())
             {
-                ui->ConnectButton->setText("关闭串口");
+                ui->ConnectButton->setText("断开");
                 QObject::connect(this->serialporthandle_t,SIGNAL(readyRead()),this,SLOT(ReceiveSlot()));
             }
             else
             {
                 QMessageBox::information(this,"串口可能未打开","请检查设备是否未连接或被其他程序占用",QMessageBox::Yes);
-                ui->ConnectButton->setText("打开串口");
+                ui->ConnectButton->setText("连接");
                 QObject::disconnect(this->serialporthandle_t,SIGNAL(readyRead()),this,SLOT(ReceiveSlot()));
             }
         }
-        else if(ui->ConnectButton->text()=="关闭串口")
+        else if(ui->ConnectButton->text()=="断开")
         {
             QObject::disconnect(this->serialporthandle_t,SIGNAL(readyRead()),this,SLOT(ReceiveSlot()));
             QMessageBox a;
@@ -56,6 +56,7 @@ void ConfigWindow::ConnectSlot()
 
             this->serialporthandle_t->clear();
             this->serialporthandle_t->close();
+            ui->ConnectButton->setText("连接");
         }
 }
 

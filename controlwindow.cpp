@@ -1,5 +1,7 @@
 ﻿#include "controlwindow.h"
 #include "ui_controlwindow.h"
+#include <QDebug>
+#include <QtDebug>
 
 ControlWindow::ControlWindow(QWidget *parent) :
     QDialog(parent),
@@ -16,6 +18,9 @@ ControlWindow::ControlWindow(QWidget *parent) :
     QObject::connect(this->ui->StopCarButton,SIGNAL(clicked(bool)),this,SLOT(StopCarSlot()));
     QObject::connect(&this->ReadAcceTimer,SIGNAL(timeout()),this,SLOT(ReadAcceSlot()));
     QObject::connect(ui->BackButton,SIGNAL(clicked(bool)),this,SLOT(close()));
+    QObject::connect(ui->AutoFollow,SIGNAL(clicked(bool)),this,SLOT(AutoFollowSlot()));
+    this->setMouseTracking(true);
+
 }
 
 ControlWindow::~ControlWindow()
@@ -58,59 +63,15 @@ void ControlWindow::Function4Slot()
 
 void ControlWindow::StopCarSlot()
 {
-    if(ui->GControlBox->isChecked())
-    {
-        ui->GControlBox->setChecked(false);
-    }
+    ui->AutoFollow->setChecked(false);
+    this->SendControlMessageSlot(0,0);
     this->serialporthandle_t->SafeWrite("FSTOP");
 }
 
 void ControlWindow::ReadAcceSlot()
 {
-    //AccePoint.setX(this->AcceSensor.reading()->x());
-    //AccePoint.setY(this->AcceSensor.reading()->y());
 
-    QPoint MessageToSend;
-    if(ui->GControlBox->isChecked())
-    {
-        AccePoint.setX(AccePoint.x()-5);
-        if(AccePoint.x()<0.3&&AccePoint.x()>-0.3)
-        {
-            AccePoint.setX(0);
-        }
-        if(AccePoint.y()<0.1&&AccePoint.y()>-0.1)
-        {
-            AccePoint.setY(0);
-        }
-
-        MessageToSend.setX(-AccePoint.x()*20);
-        if(MessageToSend.x()>=100)
-        {
-            MessageToSend.setX(99);
-        }
-        else if(MessageToSend.x()<=-100)
-        {
-            MessageToSend.setX(-99);
-        }
-
-        MessageToSend.setY(AccePoint.y()*20);
-        if(MessageToSend.y()>=100)
-        {
-            MessageToSend.setY(99);
-        }
-        else if(MessageToSend.y()<=-100)
-        {
-            MessageToSend.setY(-99);
-        }
-
-        if(this->serialporthandle_t->isOpen())
-        {
-            this->serialporthandle_t->SafeWrite("X"+QString::number(MessageToSend.x()));
-            this->serialporthandle_t->SafeWrite("Y"+QString::number(MessageToSend.y()));
-        }
-    }
-    else
-    {
+        QPoint MessageToSend;
         MessageToSend.setY(this->testButton->CurrentSpeed.x());
         MessageToSend.setX(-this->testButton->CurrentSpeed.y());
 
@@ -130,18 +91,60 @@ void ControlWindow::ReadAcceSlot()
         {
             MessageToSend.setX(-99);
         }
+        SendControlMessageSlot(MessageToSend);
 
-        if(this->serialporthandle_t->isOpen())
-        {
-            this->serialporthandle_t->SafeWrite("X"+QString::number(MessageToSend.x()));
-            this->serialporthandle_t->SafeWrite("Y"+QString::number(MessageToSend.y()));
-        }
+}
+
+void ControlWindow::SendControlMessageSlot(QPoint MessageToSend)
+{
+    if(this->serialporthandle_t->isOpen())
+    {
+        this->serialporthandle_t->SafeWrite("X"+QString::number(MessageToSend.x()));
+        this->serialporthandle_t->SafeWrite("Y"+QString::number(MessageToSend.y()));
     }
     ui->LeftEdit->setText(QString::number(MessageToSend.x()));
     ui->RightEdit->setText(QString::number(MessageToSend.y()));
 }
 
-void ControlWindow::SendControlMessageSlot()
+void ControlWindow::SendControlMessageSlot(int X, int Y)
 {
+    QPoint Point;
+    Point.setX(X);
+    Point.setY(Y);
+    this->SendControlMessageSlot(Point);
+}
+
+void ControlWindow::keyPressEvent(QKeyEvent *event)
+{
+    if(event->key()==Qt::Key_Q)
+    {
+        Function1Slot();
+    }
+    if(event->key()==Qt::Key_W)
+    {
+        Function2Slot();
+    }
+    if(event->key()==Qt::Key_E)
+    {
+        Function3Slot();
+    }
+    if(event->key()==Qt::Key_R)
+    {
+        Function4Slot();
+    }
+}
+
+void ControlWindow::AutoFollowSlot()
+{
+    qDebug()<<"ok";
+    if(ui->AutoFollow->isChecked())
+    {
+        this->testButton->setMouseTracking(true);
+    }
+    else
+    {
+        this->testButton->setMouseTracking(false);
+    }
 
 }
+

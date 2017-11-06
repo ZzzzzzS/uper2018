@@ -7,6 +7,7 @@ serialporthandle::serialporthandle()
     this->DeviceInfo=QSerialPortInfo::availablePorts();
 }
 
+
 void serialporthandle::scan()
 {
     this->DeviceInfo.clear();                                  //先清除列表

@@ -7,6 +7,7 @@
 #include <QTimer>
 #include <QPointF>
 #include <zhandle.h>
+#include <QKeyEvent>
 
 
 namespace Ui {
@@ -30,9 +31,11 @@ private slots:
     void Function2Slot();
     void Function3Slot();
     void Function4Slot();
-    void SendControlMessageSlot();
+    void SendControlMessageSlot(QPoint MessageToSend);
+    void SendControlMessageSlot(int X,int Y);
     void ReadAcceSlot();
     void StopCarSlot();
+    void AutoFollowSlot();
 private:
     Ui::ControlWindow *ui;
     QString Function1Name;
@@ -43,6 +46,8 @@ private:
     QPointF AccePoint;
 
     ZHandle *testButton;
+protected:
+    void keyPressEvent(QKeyEvent *event);
 
 };
 
