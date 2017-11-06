@@ -2,6 +2,7 @@
 #include "ui_configwindow.h"
 #include <QDesktopServices>
 #include <QUrl>
+#include <QMessageBox>
 
 ConfigWindow::ConfigWindow(QWidget *parent) :
     QDialog(parent),
@@ -22,50 +23,53 @@ ConfigWindow::~ConfigWindow()
 //连接函数
 void ConfigWindow::ConnectSlot()
 {
-    if(ui->ConnectBox->currentText().isEmpty())//判断蓝牙
+    if(ui->ConnectButton->text()=="打开串口")
         {
-            QMessageBox::information(this,"蓝牙未连接","请重新扫描蓝牙后重试",QMessageBox::Ok);
-            return;
+            QMessageBox a;
+            a.setIcon(QMessageBox::Information);
+            a.setWindowTitle("正在打开串口");
+            a.show();
+
+            this->serialporthandle_t->settings.baud=ui->SpeedBox->currentIndex();
+            this->serialporthandle_t->settings.portname=ui->ConnectBox->currentText();
+            this->serialporthandle_t->Connect();
+            a.close();
+            if(this->serialporthandle_t->isOpen())
+            {
+                ui->ConnectButton->setText("关闭串口");
+                QObject::connect(this->serialporthandle_t,SIGNAL(readyRead()),this,SLOT(ReceiveSlot()));
+            }
+            else
+            {
+                QMessageBox::information(this,"串口可能未打开","请检查设备是否未连接或被其他程序占用",QMessageBox::Yes);
+                ui->ConnectButton->setText("打开串口");
+                QObject::disconnect(this->serialporthandle_t,SIGNAL(readyRead()),this,SLOT(ReceiveSlot()));
+            }
         }
+        else if(ui->ConnectButton->text()=="关闭串口")
+        {
+            QObject::disconnect(this->serialporthandle_t,SIGNAL(readyRead()),this,SLOT(ReceiveSlot()));
+            QMessageBox a;
+            a.setIcon(QMessageBox::Information);
+            a.setWindowTitle("正在关闭串口");
+            a.show();
 
-    QObject::disconnect(this->BlueToothHandle_t,SIGNAL(ConnectOK(bool)),this,SLOT(ConnetOKSlot(bool)));
-    QObject::disconnect(this->BlueToothHandle_t,SIGNAL(DisConnetOK(bool)),this,SLOT(DisconnetOKSlot(bool)));
-    QObject::disconnect(this->BlueToothHandle_t,SIGNAL(ConnectNotOK(bool)),this,SLOT(ConnectErrorSlot()));
-    QObject::connect(this->BlueToothHandle_t,SIGNAL(ConnectOK(bool)),this,SLOT(ConnetOKSlot(bool)));
-    QObject::connect(this->BlueToothHandle_t,SIGNAL(DisConnetOK(bool)),this,SLOT(DisconnetOKSlot(bool)));
-    QObject::connect(this->BlueToothHandle_t,SIGNAL(ConnectNotOK(bool)),this,SLOT(ConnectErrorSlot()));
-
-    if(ui->ConnectButton->text()=="连接")
-    {
-        this->BlueToothHandle_t->BlueToothConnect(this->BlueToothHandle_t->DeviceInfo.at(ui->ConnectBox->currentIndex()));
-        ui->ConnectButton->setText("正在连接");
-        QObject::connect(this->BlueToothHandle_t->Socket,SIGNAL(readyRead()),this,SLOT(ReceiveSlot()));
-    }
-    else if(ui->ConnectButton->text()=="断开")
-    {
-        this->BlueToothHandle_t->BlueToothDisConnect();
-        ui->ConnectButton->setText("正在断开");
-        QObject::disconnect(this->BlueToothHandle_t->Socket,SIGNAL(readyRead()),this,SLOT(ReceiveSlot()));
-    }
+            this->serialporthandle_t->clear();
+            this->serialporthandle_t->close();
+        }
 }
 
 
 //蓝牙扫描函数
 void ConfigWindow::ScanSlot()
 {
-    if(ui->ConnectButton->text()=="断开")
-       {
-           if(QMessageBox::warning(this,"蓝牙已连接","蓝牙已连接,此时搜索可能会导致连接断开,确定要继续吗?",QMessageBox::Yes,QMessageBox::No)==QMessageBox::No)
-               return;
-       }
-    qDebug()<<"ok1";
-       ui->ConnectBox->clear();
-       qDebug()<<"ok2";
-       QObject::disconnect(this->BlueToothHandle_t,SIGNAL(DisCoverdSignal(QBluetoothDeviceInfo)),this,SLOT(DisCoveredSlot(QBluetoothDeviceInfo)));
-       qDebug()<<"ok10 ";
-       this->BlueToothHandle_t->scan();
-       qDebug()<<"ok3";
-       QObject::connect(this->BlueToothHandle_t,SIGNAL(DisCoverdSignal(QBluetoothDeviceInfo)),this,SLOT(DisCoveredSlot(QBluetoothDeviceInfo)));
+    this->ui->ConnectBox->clear();
+    this->serialporthandle_t->scan();
+    foreach (QSerialPortInfo info, this->serialporthandle_t->DeviceInfo)
+    {
+        ui->ConnectBox->addItem(info.portName());
+    }
+
 }
 
 //蓝牙发送函数
@@ -98,7 +102,7 @@ void ConfigWindow::SendSlot()
         return;
     }
 
-    this->BlueToothHandle_t->SafeWrite(ui->SendArea->text().toLatin1());
+    this->serialporthandle_t->SafeWrite(ui->SendArea->text().toLatin1());
     ui->ReceiveArea->append("上位机:"+ui->SendArea->text());
     if(ui->AutoCleanBox->isChecked())
     {
@@ -110,37 +114,14 @@ void ConfigWindow::ReceiveSlot()
 {
     if(ui->HEXBox->isChecked())
         {
-            QByteArray buf=this->BlueToothHandle_t->Socket->read(1);
+            QByteArray buf=this->serialporthandle_t->read(1);
             QString str=" "+buf.toHex();
             ui->ReceiveArea->insertPlainText(str);
             buf.clear();
         }
         else if(!ui->HEXBox->isChecked())
         {
-            ui->ReceiveArea->append(this->BlueToothHandle_t->Socket->readAll());
+            ui->ReceiveArea->append(this->serialporthandle_t->readAll());
         }
 }
 
-void ConfigWindow::DisCoveredSlot(const QBluetoothDeviceInfo &info)
-{
-    ui->ConnectBox->addItem(info.name().toUtf8());
-}
-
-
-void ConfigWindow::DisconnetOKSlot(bool ok)
-{
-    if(ok)
-    ui->ConnectButton->setText("连接");
-}
-
-void ConfigWindow::ConnetOKSlot(bool ok)
-{
-    if(ok)
-    ui->ConnectButton->setText("断开");
-}
-
-void ConfigWindow::ConnectErrorSlot()
-{
-    ui->ConnectButton->setText("断开");
-    this->ConnectSlot();
-}

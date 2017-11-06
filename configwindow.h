@@ -14,7 +14,7 @@ class ConfigWindow : public QDialog
 
 public:
     explicit ConfigWindow(QWidget *parent = 0);
-    BlueToothHandle *BlueToothHandle_t;
+    serialporthandle *serialporthandle_t;
     ~ConfigWindow();
 
 private slots:
@@ -22,10 +22,6 @@ private slots:
     void ScanSlot();
     void SendSlot();
     void ReceiveSlot();
-    void DisCoveredSlot(const QBluetoothDeviceInfo &info);
-    void DisconnetOKSlot(bool ok);
-    void ConnetOKSlot(bool ok);
-    void ConnectErrorSlot();
 
 private:
     Ui::ConfigWindow *ui;

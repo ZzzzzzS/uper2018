@@ -18,7 +18,7 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
-    BlueToothHandle *BlueToothHandle_t;
+    serialporthandle *serialporthandle_t;
     ~MainWindow();
 
 private slots:

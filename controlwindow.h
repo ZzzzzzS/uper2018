@@ -5,7 +5,6 @@
 #include "serialporthandle.h"
 #include <QString>
 #include <QTimer>
-#include <QtSensors/QAccelerometer>
 #include <QPointF>
 #include <zhandle.h>
 
@@ -20,7 +19,7 @@ class ControlWindow : public QDialog
 
 public:
     explicit ControlWindow(QWidget *parent = 0);
-    BlueToothHandle *BlueToothHandle_t;
+    serialporthandle *serialporthandle_t;
     void SetButton();
     ~ControlWindow();
 
@@ -41,7 +40,6 @@ private:
     QString Function3Name;
     QString Function4Name;
     QTimer ReadAcceTimer;
-    QAccelerometer AcceSensor;
     QPointF AccePoint;
 
     ZHandle *testButton;

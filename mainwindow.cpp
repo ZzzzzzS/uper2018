@@ -15,30 +15,30 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
-    delete this->BlueToothHandle_t;
+    delete this->serialporthandle_t;
     delete ui;
 }
 
 void MainWindow::AboutSlot()
 {
     AboutWindow WindowBase;
-    WindowBase.showFullScreen();
+    WindowBase.show();
     WindowBase.exec();
 }
 
 void MainWindow::ConfigSlot()
 {
     ConfigWindow WindowBase;
-    WindowBase.BlueToothHandle_t=this->BlueToothHandle_t;
-    WindowBase.showFullScreen();
+    WindowBase.serialporthandle_t=this->serialporthandle_t;
+    WindowBase.show();
     WindowBase.exec();
 }
 
 void MainWindow::ControlSlot()
 {
     ControlWindow WindowBase;
-    WindowBase.BlueToothHandle_t=this->BlueToothHandle_t;
+    WindowBase.serialporthandle_t=this->serialporthandle_t;
     WindowBase.SetButton();//一定不要在构造函数里面初始化蓝牙操作,蓝牙指针是个空指针,除非在构造的时候把蓝牙指针传进去了
-    WindowBase.showFullScreen();
+    WindowBase.show();
     WindowBase.exec();
 }

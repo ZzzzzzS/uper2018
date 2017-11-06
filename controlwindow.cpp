@@ -6,7 +6,7 @@ ControlWindow::ControlWindow(QWidget *parent) :
     ui(new Ui::ControlWindow)
 {
     ui->setupUi(this);
-    this->AcceSensor.start();
+    //this->AcceSensor.start();
     this->ReadAcceTimer.start(50);
     this->testButton=new ZHandle(ui->TouchAreaWidget);
     QObject::connect(this->ui->Function1Button,SIGNAL(clicked(bool)),this,SLOT(Function1Slot()));
@@ -26,34 +26,34 @@ ControlWindow::~ControlWindow()
 
 void ControlWindow::SetButton()
 {
-    if(this->BlueToothHandle_t->Socket->state()==QBluetoothSocket::ConnectedState)
+    if(this->serialporthandle_t->isOpen())
     {
-       QObject::connect(this->BlueToothHandle_t->Socket,SIGNAL(readyRead()),this,SLOT(ReceiveSlot()));
+       QObject::connect(this->serialporthandle_t,SIGNAL(readyRead()),this,SLOT(ReceiveSlot()));
     }
 }
 void ControlWindow::ReceiveSlot()
 {
-    ui->MessageEdit->append(this->BlueToothHandle_t->Socket->readAll());
+    ui->MessageEdit->append(this->serialporthandle_t->readAll());
 }
 
 void ControlWindow::Function1Slot()
 {
-    this->BlueToothHandle_t->SafeWrite("F1");
+    this->serialporthandle_t->SafeWrite("F1");
 }
 
 void ControlWindow::Function2Slot()
 {
-    this->BlueToothHandle_t->SafeWrite("F2");
+    this->serialporthandle_t->SafeWrite("F2");
 }
 
 void ControlWindow::Function3Slot()
 {
-    this->BlueToothHandle_t->SafeWrite("F3");
+    this->serialporthandle_t->SafeWrite("F3");
 }
 
 void ControlWindow::Function4Slot()
 {
-    this->BlueToothHandle_t->SafeWrite("F4");
+    this->serialporthandle_t->SafeWrite("F4");
 }
 
 void ControlWindow::StopCarSlot()
@@ -62,13 +62,13 @@ void ControlWindow::StopCarSlot()
     {
         ui->GControlBox->setChecked(false);
     }
-    this->BlueToothHandle_t->SafeWrite("FSTOP");
+    this->serialporthandle_t->SafeWrite("FSTOP");
 }
 
 void ControlWindow::ReadAcceSlot()
 {
-    AccePoint.setX(this->AcceSensor.reading()->x());
-    AccePoint.setY(this->AcceSensor.reading()->y());
+    //AccePoint.setX(this->AcceSensor.reading()->x());
+    //AccePoint.setY(this->AcceSensor.reading()->y());
 
     QPoint MessageToSend;
     if(ui->GControlBox->isChecked())
@@ -103,10 +103,10 @@ void ControlWindow::ReadAcceSlot()
             MessageToSend.setY(-99);
         }
 
-        if(this->BlueToothHandle_t->Socket->state()==QBluetoothSocket::ConnectedState)
+        if(this->serialporthandle_t->isOpen())
         {
-            this->BlueToothHandle_t->SafeWrite("X"+QString::number(MessageToSend.x()));
-            this->BlueToothHandle_t->SafeWrite("Y"+QString::number(MessageToSend.y()));
+            this->serialporthandle_t->SafeWrite("X"+QString::number(MessageToSend.x()));
+            this->serialporthandle_t->SafeWrite("Y"+QString::number(MessageToSend.y()));
         }
     }
     else
@@ -131,10 +131,10 @@ void ControlWindow::ReadAcceSlot()
             MessageToSend.setX(-99);
         }
 
-        if(this->BlueToothHandle_t->Socket->state()==QBluetoothSocket::ConnectedState)
+        if(this->serialporthandle_t->isOpen())
         {
-            this->BlueToothHandle_t->SafeWrite("X"+QString::number(MessageToSend.x()));
-            this->BlueToothHandle_t->SafeWrite("Y"+QString::number(MessageToSend.y()));
+            this->serialporthandle_t->SafeWrite("X"+QString::number(MessageToSend.x()));
+            this->serialporthandle_t->SafeWrite("Y"+QString::number(MessageToSend.y()));
         }
     }
     ui->LeftEdit->setText(QString::number(MessageToSend.x()));

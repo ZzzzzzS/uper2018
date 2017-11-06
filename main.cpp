@@ -1,13 +1,13 @@
 ﻿#include "mainwindow.h"
 #include <QApplication>
-#include "bluetoothhandle.h"
+#include "serialporthandle.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    BlueToothHandle *BlueToothHandle_t=new BlueToothHandle;
+    serialporthandle *serialporthandle_t=new serialporthandle;
     MainWindow w;
-    w.BlueToothHandle_t=BlueToothHandle_t;
+    w.serialporthandle_t=serialporthandle_t;
     w.show();
 
     return a.exec();
