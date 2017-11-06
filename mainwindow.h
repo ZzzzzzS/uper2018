@@ -5,6 +5,7 @@
 #include "aboutwindow.h"
 #include "configwindow.h"
 #include "controlwindow.h"
+#include "smartcarhelper.h"
 #include "bluetoothhandle.h"
 #include <QPixmap>
 
@@ -25,6 +26,7 @@ private slots:
     void AboutSlot();
     void ConfigSlot();
     void ControlSlot();
+    void HelperSlot();
 
 private:
     Ui::MainWindow *ui;
