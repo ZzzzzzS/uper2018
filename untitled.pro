@@ -6,6 +6,7 @@
 
 QT       += core gui
 QT       += serialport
+QT       += webenginewidgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -33,7 +34,8 @@ SOURCES += \
     settingwindow.cpp \
     aboutwindow.cpp \
     zhandle.cpp \
-    serialporthandle.cpp
+    serialporthandle.cpp \
+    websupportwindow.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -43,7 +45,8 @@ HEADERS += \
     settingwindow.h \
     aboutwindow.h \
     zhandle.h \
-    serialporthandle.h
+    serialporthandle.h \
+    websupportwindow.h
 
 FORMS += \
         mainwindow.ui \
@@ -51,7 +54,8 @@ FORMS += \
     controlwindow.ui \
     smartcarhelper.ui \
     settingwindow.ui \
-    aboutwindow.ui
+    aboutwindow.ui \
+    websupportwindow.ui
 
 CONFIG += mobility
 MOBILITY = 
