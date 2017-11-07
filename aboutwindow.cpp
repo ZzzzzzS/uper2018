@@ -1,5 +1,6 @@
 ﻿#include "aboutwindow.h"
 #include "ui_aboutwindow.h"
+#include "websupportwindow.h"
 #include "QUrl"
 
 AboutWindow::AboutWindow(QWidget *parent) :
@@ -20,10 +21,14 @@ AboutWindow::~AboutWindow()
 
 void AboutWindow::BlogSlot()
 {
-  QDesktopServices::openUrl(QUrl(QLatin1String("http://zzshub.cn/")));
+  WebSupportWindow WindowBase(this,QUrl(QLatin1String("http://zzshub.cn/")));
+  WindowBase.showFullScreen();
+  WindowBase.exec();
 }
 
 void AboutWindow::FeedBackSlot()
 {
-    QDesktopServices::openUrl(QUrl(QLatin1String("http://zzshub.cn/")));
+    WebSupportWindow WindowBase(this,QUrl(QLatin1String("http://zzshub.cn/")));
+    WindowBase.showFullScreen();
+    WindowBase.exec();
 }

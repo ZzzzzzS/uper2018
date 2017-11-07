@@ -8,7 +8,8 @@ QT       += core gui
 QT       += serialport
 QT       += bluetooth
 QT       += sensors
-
+QT       += webview
+QT       += quickwidgets
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = untitled
@@ -35,7 +36,8 @@ SOURCES += \
     settingwindow.cpp \
     aboutwindow.cpp \
     bluetoothhandle.cpp \
-    zhandle.cpp
+    zhandle.cpp \
+    websupportwindow.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -45,7 +47,8 @@ HEADERS += \
     settingwindow.h \
     aboutwindow.h \
     bluetoothhandle.h \
-    zhandle.h
+    zhandle.h \
+    websupportwindow.h
 
 FORMS += \
         mainwindow.ui \
@@ -53,8 +56,12 @@ FORMS += \
     controlwindow.ui \
     smartcarhelper.ui \
     settingwindow.ui \
-    aboutwindow.ui
+    aboutwindow.ui \
+    websupportwindow.ui
 
 CONFIG += mobility
 MOBILITY = 
+
+DISTFILES += \
+    webEngineView.qml
 
