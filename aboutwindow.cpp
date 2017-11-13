@@ -36,5 +36,7 @@ void AboutWindow::BlogSlot()
 
 void AboutWindow::FeedBackSlot()
 {
-    QDesktopServices::openUrl(QUrl(QLatin1String("http://zzshub.cn/")));
+    WebSupportWindow WindowBase(this,QUrl(QLatin1String("http://zzshub.cn/2017/11/13/uper2018开发和反馈/")));
+    WindowBase.show();
+    WindowBase.exec();
 }

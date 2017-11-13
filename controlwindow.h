@@ -48,6 +48,7 @@ private:
     ZHandle *testButton;
 protected:
     void keyPressEvent(QKeyEvent *event);
+    void resizeEvent(QResizeEvent *e);
 
 };
 

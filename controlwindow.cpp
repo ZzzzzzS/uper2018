@@ -11,6 +11,9 @@ ControlWindow::ControlWindow(QWidget *parent) :
     //this->AcceSensor.start();
     this->ReadAcceTimer.start(50);
     this->testButton=new ZHandle(ui->TouchAreaWidget);
+    testButton->resize(50,50);
+    QPixmap icon("wall.png");
+    this->testButton->setIcon(icon.scaled(testButton->size()));
     QObject::connect(this->ui->Function1Button,SIGNAL(clicked(bool)),this,SLOT(Function1Slot()));
     QObject::connect(this->ui->Function2Button,SIGNAL(clicked(bool)),this,SLOT(Function2Slot()));
     QObject::connect(this->ui->Function3Button,SIGNAL(clicked(bool)),this,SLOT(Function3Slot()));
@@ -29,9 +32,7 @@ ControlWindow::~ControlWindow()
 
 void ControlWindow::SetButton()
 {
-    this->testButton->centerPoint.setY(ui->TouchAreaWidget->height()/2);
-    this->testButton->centerPoint.setX(ui->TouchAreaWidget->width()/2);
-    this->testButton->move(testButton->centerPoint);
+    testButton->SetWindowSize(ui->TouchAreaWidget->width(),ui->TouchAreaWidget->height());
     if(this->serialporthandle_t->isOpen())
     {
        QObject::connect(this->serialporthandle_t,SIGNAL(readyRead()),this,SLOT(ReceiveSlot()));
@@ -148,5 +149,10 @@ void ControlWindow::AutoFollowSlot()
         this->testButton->setMouseTracking(false);
     }
 
+}
+
+void ControlWindow::resizeEvent(QResizeEvent *e)
+{
+    this->testButton->SetWindowSize(ui->TouchAreaWidget->width(),ui->TouchAreaWidget->height());
 }
 

@@ -22,14 +22,17 @@ public:
         centerPoint.setY(this->centerPoint.x()/2);   //设置圆心Y坐标
         this->move(centerPoint);
         r = 100;      //设置圆的半径
+        rate=1;
     }
-
+    void SetWindowSize(int X, int Y);
     QPoint CurrentSpeed;
-    QPoint centerPoint;
+
 private:
+    QPoint centerPoint;
     QPoint WindowPoint;
 
     double r;
+    double rate;
 protected:
     void mouseMoveEvent(QMouseEvent*e);
     void mousePressEvent(QMouseEvent*e);

@@ -54,8 +54,8 @@ void ZHandle::mouseMoveEvent(QMouseEvent *e)
         move(bpoint);
     }
 
-    this->CurrentSpeed.setX((bpoint.x()-200));
-    this->CurrentSpeed.setY((bpoint.y()-100));
+    this->CurrentSpeed.setX((bpoint.x()-centerPoint.x())*rate);
+    this->CurrentSpeed.setY((bpoint.y()-centerPoint.y())*rate);
 }
 
 void ZHandle::mouseReleaseEvent(QMouseEvent *e)
@@ -63,4 +63,17 @@ void ZHandle::mouseReleaseEvent(QMouseEvent *e)
     move(centerPoint);
     this->CurrentSpeed.setX(0);
     this->CurrentSpeed.setY(0);
+}
+
+void ZHandle::SetWindowSize(int X, int Y)
+{
+    centerPoint.setX(X/2);
+    centerPoint.setY(Y/2);
+    this->move(centerPoint);
+    if(X>Y)
+        r=Y/2;
+    else
+        r=X/2;
+    r-=this->height();
+    rate=100/r;
 }

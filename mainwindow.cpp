@@ -1,6 +1,7 @@
 ﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "websupportwindow.h"
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -15,9 +16,10 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->RemoteButton,SIGNAL(clicked(bool)),this,SLOT(ControlSlot()));
     QObject::connect(ui->DebugButton,SIGNAL(clicked(bool)),this,SLOT(HelperSlot()));
     QObject::connect(ui->SettingButton,SIGNAL(clicked(bool)),this,SLOT(SuppotSlot()));
-    ui->webEngineView->setUrl(QString("http://zzshub.cn/uperlogo.png"));
+    ui->webEngineView->setUrl(QString("http://code.zzs.gitee.io/uperlogo.png"));
     ui->webEngineView->show();
     this->setMouseTracking(true);
+    ui->DebugButton->hide();
 }
 
 MainWindow::~MainWindow()
@@ -63,7 +65,7 @@ void MainWindow::HelperSlot()
 
 void MainWindow::SuppotSlot()
 {
-    WebSupportWindow WindowBase(this,QUrl(QLatin1String("http://zzshub.cn/")));
+    WebSupportWindow WindowBase(this,QUrl(QLatin1String("http://zzshub.cn/2017/11/13/uper2018使用说明/")));
     WindowBase.show();
     WindowBase.exec();
 }
