@@ -20,6 +20,8 @@ private slots:
     void FeedBackSlot();
 private:
     Ui::AboutWindow *ui;
+    QPixmap logo;
+    QPixmap zzs;
 };
 
 

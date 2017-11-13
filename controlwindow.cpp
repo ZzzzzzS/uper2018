@@ -20,7 +20,6 @@ ControlWindow::ControlWindow(QWidget *parent) :
     QObject::connect(ui->BackButton,SIGNAL(clicked(bool)),this,SLOT(close()));
     QObject::connect(ui->AutoFollow,SIGNAL(clicked(bool)),this,SLOT(AutoFollowSlot()));
     this->setMouseTracking(true);
-
 }
 
 ControlWindow::~ControlWindow()
@@ -28,9 +27,11 @@ ControlWindow::~ControlWindow()
     delete ui;
 }
 
-
 void ControlWindow::SetButton()
 {
+    this->testButton->centerPoint.setY(ui->TouchAreaWidget->height()/2);
+    this->testButton->centerPoint.setX(ui->TouchAreaWidget->width()/2);
+    this->testButton->move(testButton->centerPoint);
     if(this->serialporthandle_t->isOpen())
     {
        QObject::connect(this->serialporthandle_t,SIGNAL(readyRead()),this,SLOT(ReceiveSlot()));
@@ -63,6 +64,7 @@ void ControlWindow::Function4Slot()
 
 void ControlWindow::StopCarSlot()
 {
+
     ui->AutoFollow->setChecked(false);
     this->SendControlMessageSlot(0,0);
     this->serialporthandle_t->SafeWrite("FSTOP");

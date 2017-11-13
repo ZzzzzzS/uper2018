@@ -1,5 +1,6 @@
 ﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "websupportwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -7,11 +8,14 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     this->pix.load("logo.jpg");
+    this->setMaximumSize(300,600);
+    this->setMinimumSize(300,600);
     QObject::connect(ui->AboutButton,SIGNAL(clicked(bool)),this,SLOT(AboutSlot()));
     QObject::connect(ui->BluetoothButton,SIGNAL(clicked(bool)),this,SLOT(ConfigSlot()));
     QObject::connect(ui->RemoteButton,SIGNAL(clicked(bool)),this,SLOT(ControlSlot()));
     QObject::connect(ui->DebugButton,SIGNAL(clicked(bool)),this,SLOT(HelperSlot()));
-    ui->webEngineView->setUrl(QString("http://zzshub.cn/718logo.jpg"));
+    QObject::connect(ui->SettingButton,SIGNAL(clicked(bool)),this,SLOT(SuppotSlot()));
+    ui->webEngineView->setUrl(QString("http://zzshub.cn/uperlogo.png"));
     ui->webEngineView->show();
     this->setMouseTracking(true);
 }
@@ -42,8 +46,8 @@ void MainWindow::ControlSlot()
     this->hide();
     ControlWindow WindowBase;
     WindowBase.serialporthandle_t=this->serialporthandle_t;
-    WindowBase.SetButton();//一定不要在构造函数里面初始化蓝牙操作,蓝牙指针是个空指针,除非在构造的时候把蓝牙指针传进去了
     WindowBase.show();
+    WindowBase.SetButton();//一定不要在构造函数里面初始化蓝牙操作,蓝牙指针是个空指针,除非在构造的时候把蓝牙指针传进去了
     WindowBase.exec();
     this->show();
 }
@@ -55,4 +59,11 @@ void MainWindow::HelperSlot()
     WindowBase.show();
     WindowBase.exec();
     this->show();
+}
+
+void MainWindow::SuppotSlot()
+{
+    WebSupportWindow WindowBase(this,QUrl(QLatin1String("http://zzshub.cn/")));
+    WindowBase.show();
+    WindowBase.exec();
 }

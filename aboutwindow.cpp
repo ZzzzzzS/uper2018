@@ -12,6 +12,14 @@ AboutWindow::AboutWindow(QWidget *parent) :
     QObject::connect(ui->BackButton,SIGNAL(clicked(bool)),this,SLOT(close()));
     QObject::connect(ui->QtButton,SIGNAL(clicked(bool)),qApp,SLOT(aboutQt()));
     QObject::connect(ui->FeedBackButton,SIGNAL(clicked(bool)),this,SLOT(FeedBackSlot()));
+    this->logo.load("718logo.jpg");
+    this->zzs.load("zzslogo.jpg");
+
+    ui->logo718->setPixmap(this->logo.scaled(ui->logo718->size()));
+    ui->logozzs->setPixmap(this->zzs.scaled(ui->logozzs->size()));
+
+    ui->logo718->show();
+    ui->logozzs->show();
 }
 
 AboutWindow::~AboutWindow()

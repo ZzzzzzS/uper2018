@@ -27,6 +27,7 @@ private slots:
     void ConfigSlot();
     void ControlSlot();
     void HelperSlot();
+    void SuppotSlot();
 
 private:
     Ui::MainWindow *ui;

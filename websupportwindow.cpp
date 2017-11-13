@@ -22,7 +22,7 @@ WebSupportWindow::~WebSupportWindow()
 
 void WebSupportWindow::BackSlot()
 {
-    if(linknumber<=0)
+    if(linknumber<=1)
         this->close();
     else
     {
