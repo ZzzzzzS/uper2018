@@ -1,7 +1,5 @@
 ﻿#include "controlwindow.h"
 #include "ui_controlwindow.h"
-#include <QDebug>
-#include <QtDebug>
 
 ControlWindow::ControlWindow(QWidget *parent) :
     QDialog(parent),
@@ -139,7 +137,6 @@ void ControlWindow::keyPressEvent(QKeyEvent *event)
 
 void ControlWindow::AutoFollowSlot()
 {
-    qDebug()<<"ok";
     if(ui->AutoFollow->isChecked())
     {
         this->testButton->setMouseTracking(true);

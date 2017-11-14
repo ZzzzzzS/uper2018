@@ -5,8 +5,6 @@
 #include <QPushButton>
 #include <QTouchEvent>
 #include <QPoint>
-#include <QDebug>
-#include <QtDebug>
 
 class ZHandle : public QPushButton
 {
@@ -14,8 +12,6 @@ public:
     ZHandle();
     ZHandle(QWidget *parent=nullptr):QPushButton(parent)
     {
-        qDebug()<<parent->height();
-        qDebug()<<parent->width();
         this->centerPoint.setY(parent->height());
         this->centerPoint.setX(parent->width());
         centerPoint.setX(this->centerPoint.x()/2);   //设置圆心X坐标

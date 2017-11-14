@@ -65,7 +65,7 @@ void MainWindow::HelperSlot()
 
 void MainWindow::SuppotSlot()
 {
-    WebSupportWindow WindowBase(this,QUrl(QLatin1String("http://zzshub.cn/2017/11/13/uper2018使用说明/")));
+    WebSupportWindow WindowBase(this,QUrl(QLatin1String("http://code.zzs.gitee.io/2017/11/13/uper2018use/")));
     WindowBase.show();
     WindowBase.exec();
 }

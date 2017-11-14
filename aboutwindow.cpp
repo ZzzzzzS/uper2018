@@ -36,7 +36,7 @@ void AboutWindow::BlogSlot()
 
 void AboutWindow::FeedBackSlot()
 {
-    WebSupportWindow WindowBase(this,QUrl(QLatin1String("http://zzshub.cn/2017/11/13/uper2018开发和反馈/")));
+    WebSupportWindow WindowBase(this,QUrl(QLatin1String("http://zzshub.cn/2017/11/13/uper2018dev")));
     WindowBase.show();
     WindowBase.exec();
 }
