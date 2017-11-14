@@ -45,6 +45,8 @@ private:
     QPointF AccePoint;
 
     ZHandle *testButton;
+protected:
+    void resizeEvent(QResizeEvent *e);
 
 };
 

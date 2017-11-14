@@ -21,16 +21,10 @@ AboutWindow::~AboutWindow()
 
 void AboutWindow::BlogSlot()
 {
-  WebSupportWindow WindowBase(this,QUrl(QLatin1String("http://zzshub.cn/")));
-
-  WindowBase.showFullScreen();
-  WindowBase.load();
-  WindowBase.exec();
+  QDesktopServices::openUrl(QUrl(QLatin1String("http://zzshub.cn/")));
 }
 
 void AboutWindow::FeedBackSlot()
 {
-    WebSupportWindow WindowBase(this,QUrl(QLatin1String("http://zzshub.cn/")));
-    WindowBase.showFullScreen();
-    WindowBase.exec();
+  QDesktopServices::openUrl(QUrl(QLatin1String("http://code.zzs.gitee.io/2017/11/13/uper2018dev/")));
 }

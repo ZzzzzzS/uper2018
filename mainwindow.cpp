@@ -6,11 +6,17 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    QPixmap a;
+    QUrl b("qrc:logo.jpg");
+    a.load(b.toLocalFile());
+    ui->Logolabel->setPixmap(a);
     QObject::connect(ui->AboutButton,SIGNAL(clicked(bool)),this,SLOT(AboutSlot()));
     QObject::connect(ui->BluetoothButton,SIGNAL(clicked(bool)),this,SLOT(ConfigSlot()));
     QObject::connect(ui->RemoteButton,SIGNAL(clicked(bool)),this,SLOT(ControlSlot()));
     QObject::connect(ui->DebugButton,SIGNAL(clicked(bool)),this,SLOT(HelperSlot()));
+    QObject::connect(ui->SettingButton,SIGNAL(clicked(bool)),this,SLOT(SupportSlot()));
     this->setMouseTracking(true);
+    ui->DebugButton->hide();
 }
 
 MainWindow::~MainWindow()
@@ -51,4 +57,9 @@ void MainWindow::HelperSlot()
     WindowBase.showFullScreen();
     WindowBase.exec();
     this->show();
+}
+
+void MainWindow::SupportSlot()
+{
+    QDesktopServices::openUrl(QUrl(QLatin1String("http://code.zzs.gitee.io/2017/11/13/uper2018use/")));
 }

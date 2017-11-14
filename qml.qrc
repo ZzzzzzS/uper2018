@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>webview.qml</file>
         <file>logo.qml</file>
+        <file>logo.jpg</file>
     </qresource>
 </RCC>

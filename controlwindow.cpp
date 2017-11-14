@@ -145,3 +145,11 @@ void ControlWindow::SendControlMessageSlot()
 {
 
 }
+
+void ControlWindow::resizeEvent(QResizeEvent *e)
+
+{
+
+    this->testButton->SetWindowSize(ui->TouchAreaWidget->width(),ui->TouchAreaWidget->height());
+
+}
