@@ -22,7 +22,9 @@ AboutWindow::~AboutWindow()
 void AboutWindow::BlogSlot()
 {
   WebSupportWindow WindowBase(this,QUrl(QLatin1String("http://zzshub.cn/")));
+
   WindowBase.showFullScreen();
+  WindowBase.load();
   WindowBase.exec();
 }
 

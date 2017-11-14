@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>webview.qml</file>
+        <file>logo.qml</file>
+    </qresource>
+</RCC>

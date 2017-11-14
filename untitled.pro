@@ -62,6 +62,8 @@ FORMS += \
 CONFIG += mobility
 MOBILITY = 
 
-DISTFILES += \
-    webEngineView.qml
+DISTFILES +=
+
+RESOURCES += \
+    qml.qrc
 

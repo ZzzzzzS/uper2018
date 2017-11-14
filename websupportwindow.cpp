@@ -7,8 +7,10 @@ WebSupportWindow::WebSupportWindow(QWidget *parent,QUrl URL) :
     ui(new Ui::WebSupportWindow)
 {
     ui->setupUi(this);
-    QUrl source("qrc:webEngineView.qml");
-    ui->webEngineView->setSource(QUrl::fromLocalFile("webEngineView.qml"));
+
+    QUrl source("qrc:logo.qml");
+    ui->quickWidget->setResizeMode(QQuickWidget::SizeRootObjectToView);
+    ui->quickWidget->setSource(source);
     QObject::connect(ui->BackButton,SIGNAL(clicked(bool)),this,SLOT(BackSlot()));
 }
 
@@ -23,3 +25,7 @@ void WebSupportWindow::BackSlot()
     this->close();
 }
 
+void WebSupportWindow::load()
+{
+
+}

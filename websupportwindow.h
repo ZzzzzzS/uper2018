@@ -16,7 +16,7 @@ public:
     explicit WebSupportWindow(QWidget *parent = 0,QUrl URL=QUrl(QString("https://zzzzzzs.github.io/")));
     ~WebSupportWindow();
 
-
+    void load();
 private slots:
     void BackSlot();
 private:
