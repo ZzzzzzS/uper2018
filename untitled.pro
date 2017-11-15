@@ -62,8 +62,17 @@ FORMS += \
 CONFIG += mobility
 MOBILITY = 
 
-DISTFILES +=
+DISTFILES += \
+    android/AndroidManifest.xml \
+    android/gradle/wrapper/gradle-wrapper.jar \
+    android/gradlew \
+    android/res/values/libs.xml \
+    android/build.gradle \
+    android/gradle/wrapper/gradle-wrapper.properties \
+    android/gradlew.bat
 
 RESOURCES += \
     qml.qrc
+
+ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 
