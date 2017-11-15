@@ -1,5 +1,6 @@
 ﻿#include "controlwindow.h"
 #include "ui_controlwindow.h"
+#include <cmath>
 
 ControlWindow::ControlWindow(QWidget *parent) :
     QDialog(parent),
@@ -26,6 +27,10 @@ ControlWindow::~ControlWindow()
 
 void ControlWindow::SetButton()
 {
+    if(this->height()>this->width())
+    {
+        QMessageBox::information(this,"提示","横屏使用效果更好");
+    }
     if(this->BlueToothHandle_t->Socket->state()==QBluetoothSocket::ConnectedState)
     {
        QObject::connect(this->BlueToothHandle_t->Socket,SIGNAL(readyRead()),this,SLOT(ReceiveSlot()));
@@ -70,6 +75,11 @@ void ControlWindow::ReadAcceSlot()
     AccePoint.setX(this->AcceSensor.reading()->x());
     AccePoint.setY(this->AcceSensor.reading()->y());
 
+    if(AccePoint.x()<0)
+    {
+        AccePoint.setX(-AccePoint.x());
+    }
+
     QPoint MessageToSend;
     if(ui->GControlBox->isChecked())
     {
@@ -102,6 +112,7 @@ void ControlWindow::ReadAcceSlot()
         {
             MessageToSend.setY(-99);
         }
+
 
         if(this->BlueToothHandle_t->Socket->state()==QBluetoothSocket::ConnectedState)
         {
