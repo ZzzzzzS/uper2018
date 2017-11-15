@@ -143,7 +143,7 @@
          <item>
           <widget class="QLabel" name="label_3">
            <property name="text">
-            <string>版本信息:1.0</string>
+            <string>版本信息:1.0.2</string>
            </property>
           </widget>
          </item>
